@@ -1,31 +1,42 @@
-const {Router} = require('express')
-const db = require('../db/db.json')
+/** @format */
 
-const notesRoute = Router()
+const { Router } = require("express");
+const fs = require("fs/promises");
+const db = require("../db/db.json");
 
-notesRoute.get('/', (req, res) => {
-    console.log('getting all notes');
-    console.log({req,res});
+const notesRoute = Router();
+const dbObj = fs.readFile(db);
+console.log(dbObj);
 
-    const dbObj = JSON.parse(db)
+notesRoute.get("/", (req, res) => {
+	console.log("getting all notes");
+	console.log({ req, res });
 
-    res.status(200).json(db)
+	res.status(200).json(db);
+});
+
+notesRoute.get("/:id", (req, res) => {
+	res.send(req.params.id);
+});
+
+notesRoute.post("/", (req, res) => {
+	console.log("POST request to the /api/notes to create a new note");
+	const { id, title, text } = req.body;
+	res.send(`title ${id} ${title}, desc ${text}`);
+});
+
+notesRoute.patch("/:id", (req, res) => {
+	const { id, title, text } = req.body;
+	res.send(`title ${id} ${title}, desc ${text}`);
+});
 
 
-})
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
-app.post('/', (req, res) => {
-  res.send('POST request to the /api/notes to create a new note')
-})
+notesRoute.delete('/:id',(req, res) => {
+  const { id } = req.params;
+  res.send(`Delete note with id ${id}`);
+});
 
-
-
-
-
-
-
-
-
-
-
-module.exports ={notesRoute}
+module.exports = { notesRoute };
