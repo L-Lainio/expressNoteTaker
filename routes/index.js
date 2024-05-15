@@ -5,21 +5,20 @@ const fs = require("fs/promises");
 const db = require("../db/db.json");
 
 const notesRoute = Router();
-const dbObj = fs.readFile(db);
-console.log(dbObj);
 
-notesRoute.get("/", (req, res) => {
+notesRoute.get("/notes", async(req, res) => {
 	console.log("getting all notes");
 	console.log({ req, res });
-
-	res.status(200).json(db);
+	let allnotes = await fs.readFileAsync("../db/db.json", "utf8");
+	console.log("string hello",allnotes);
+	res.status(200).json(allnotes);
 });
 
-notesRoute.get("/:id", (req, res) => {
+notesRoute.get("/notes/:id", (req, res) => {
 	res.send(req.params.id);
 });
 
-notesRoute.post("/", (req, res) => {
+notesRoute.post("/notes", (req, res) => {
 	console.log("POST request to the /api/notes to create a new note");
 	const { id, title, text } = req.body;
 	res.send(`title ${id} ${title}, desc ${text}`);
@@ -30,13 +29,9 @@ notesRoute.patch("/:id", (req, res) => {
 	res.send(`title ${id} ${title}, desc ${text}`);
 });
 
-
-var bodyParser = require('body-parser');
-app.use(bodyParser.json());
-
-notesRoute.delete('/:id',(req, res) => {
-  const { id } = req.params;
-  res.send(`Delete note with id ${id}`);
+notesRoute.delete("/:id", (req, res) => {
+	const { id } = req.params;
+	res.send(`Delete note with id ${id}`);
 });
 
 module.exports = { notesRoute };
