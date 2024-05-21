@@ -7,7 +7,7 @@ const fs = require("fs");
 // Path import
 const path = require("path");
 // Helper method for generating unique ids
-const uniqid = require("uniqid");
+const uuid = require("uuid");
 
 // Port
 const PORT = process.env.PORT || 3001;
@@ -66,7 +66,7 @@ app.post("/api/notes", (req, res) => {
 		const newNote = {
 			title: title,
 			text: text,
-			id: uniqid(),
+			id: uuid(),
 		};
 
 		readThenAppendToJson(newNote, "Develop/db/db.json");
@@ -82,7 +82,7 @@ app.post("/api/notes", (req, res) => {
 	}
 });
 
-// Delete route -> reads the db.json file, uses the json objects uniqids to match the object to be deleted, removes that object from the db.json file, then re-writes the db.json file
+// Delete route -> reads the db.json file, uses the json objects uuids to match the object to be deleted, removes that object from the db.json file, then re-writes the db.json file
 app.delete("/api/notes/:id", (req, res) => {
 	let id = req.params.id;
 	let parsedData;

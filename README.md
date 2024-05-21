@@ -53,7 +53,7 @@ Deployed on render:
 
 ## Technologies Used
 
-This project is powered by Express.js, Node.js (v16.19.1), and JavaScript. It utilizes uniqid (node package manager), and file system module (node package manager) as dependencies, and utilized an application called Insomnia to test GET, POST, and DELETE request routes without needing a front end framework built out.
+This project is powered by Express.js, Node.js (v16.19.1), and JavaScript. It utilizes uuid (node package manager), and file system module (node package manager) as dependencies, and utilized an application called Insomnia to test GET, POST, and DELETE request routes without needing a front end framework built out.
 
 ## Installation
 
@@ -66,7 +66,7 @@ This project is powered by Express.js, Node.js (v16.19.1), and JavaScript. It ut
 
 4. Once node.js v16 is installed, in the terminal, utilize the command npm init -y to initialize and create a package.json where project files will be stored.
 
-5. Next, use the terminal to run the command npm i to install the dependencies associated with this application (developers may need to install express and uniqid directly from the command line, to do so the command for express will be npm i express to install the latests version of Express framework globally so that it can be used within the node terminal, and npm i uniqid to install the latest version of uniqid).
+5. Next, use the terminal to run the command npm i to install the dependencies associated with this application (developers may need to install express and uuid directly from the command line, to do so the command for express will be npm i express to install the latests version of Express framework globally so that it can be used within the node terminal, and npm i uuid to install the latest version of uuid).
 
 6. To run the server, within the terminal, type the command npm start or node server.js.
 
