@@ -39,15 +39,15 @@ This application was designed to give users a place to store notes to help them 
 
 Deployed on render:
 
-<!-- Render deployed link -->
+https://express-jsnotetaker.onrender.com
 
 ## Live Screen Recording of Application Functionality
 
-<!-- https://drive.google.com/file/d/1gE34wxOoIaKn4J0mv9qtXtMQ0jdbJ1_k/view -->
+https://share.zight.com/E0uenz2G
 
 ## Screenshots
 
-![Screenshot1-week-11-challenge](https://user-images.png)
+![Screenshot1-week-11-challenge](https://share.zight.com/04u8qYGd)
 
 
 
