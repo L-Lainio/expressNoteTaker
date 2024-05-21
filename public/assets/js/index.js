@@ -20,9 +20,9 @@ const show = (elem) => {
 };
 
 // Hide an element
-const hide = (elem) => {
-	elem.style.display = "none";
-};
+// const hide = (elem) => {
+// 	elem.style.display = "none";
+// };
 
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
@@ -71,10 +71,6 @@ const handleNoteSave = () => {
 		title: noteTitle.value,
 		text: noteText.value,
 	};
-	console.log(newNote).then(() => {
-		getAndRenderNotes();
-		renderActiveNote();
-	});
 };
 
 // Delete the clicked note
@@ -115,7 +111,6 @@ const renderActiveNote = () => {
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleRenderSaveBtn = () => {
 	if (!noteTitle.value.trim() || !noteText.value.trim()) {
-		hide(saveBtn);
 	} else {
 		show(saveBtn);
 	}
@@ -125,7 +120,7 @@ const handleRenderSaveBtn = () => {
 if (noteTitle) {
 	noteTitle.addEventListener("keyup", handleRenderSaveBtn);
 }
-noteText.addEventListener("keyup", handleRenderSaveBtn);
+// noteText.addEventListener("keyup", handleRenderSaveBtn);
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
@@ -158,8 +153,7 @@ const renderNoteList = async (notes) => {
 				"text-danger",
 				"delete-note"
 			);
-			delBtnEl.addEventListener("click", handleNoteDelete);
-
+			
 			liEl.append(delBtnEl);
 		}
 
@@ -189,7 +183,7 @@ const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === "/notes") {
 	saveBtn.addEventListener("click", handleNoteSave);
-	newNoteBtn.addEventListener("click", handleNewNoteView);
+	newNoteBtn.addEventListener("click", handleRenderSaveBtn);
 	noteTitle.addEventListener("keyup", handleRenderSaveBtn);
 	noteText.addEventListener("keyup", handleRenderSaveBtn);
 }
