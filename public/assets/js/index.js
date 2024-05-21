@@ -1,5 +1,3 @@
-/** @format */
-
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -107,11 +105,15 @@ const handleNoteView = (e) => {
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
 	activeNote = {};
+	show(clearBtn);
 	renderActiveNote();
 };
 
 const handleRenderSaveBtn = () => {
-	if (!noteTitle.value.trim() || !noteText.value.trim()) {
+	show(clearBtn);
+	if (!noteTitle.value.trim() && !noteText.value.trim()) {
+		hide(clearBtn);
+	} else if (!noteTitle.value.trim() || !noteText.value.trim()) {
 		hide(saveNoteBtn);
 	} else {
 		show(saveNoteBtn);
