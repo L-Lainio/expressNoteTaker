@@ -1,128 +1,107 @@
-# 11 Express.js: Note Taker
+# Note Taker (powered by Express.js)
+Week-11 Challenge
 
-## Your Task
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributor Covenant](https://img.shields.io/badge/Lora-Lainio-4baaaa.svg)](code_of_conduct.md)
 
-Your assignment is to modify starter code to create an application called Note Taker that can be used to write and save notes. This application will use an Express.js back end and will save and retrieve note data from a JSON file.
+## Table of Contents
 
-The application’s front end has already been created. It's your job to build the back end, connect the two, and then deploy the entire application to Render.
+ * [Description](#description)
 
-## User Story
+ * [Live-URL-of-Deployed-Application](#live-url-of-deployed-application)
 
-```md
-AS A small business owner
-I WANT to be able to write and save notes
-SO THAT I can organize my thoughts and keep track of tasks I need to complete
-```
+ * [Live-Screen-Recording-of-Application-Functionality](#live-screen-recording-of-application-functionality)
 
-## Acceptance Criteria
+ * [Screenshots](#screenshots)
 
-```md
-GIVEN a note-taking application
-WHEN I open the Note Taker
-THEN I am presented with a landing page with a link to a notes page
-WHEN I click on the link to the notes page
-THEN I am presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column
-WHEN I enter a new note title and the note’s text
-THEN a "Save Note" button and a "Clear Form" button appear in the navigation at the top of the page
-WHEN I click on the Save button
-THEN the new note I have entered is saved and appears in the left-hand column with the other existing notes and the buttons in the navigation disappear
-WHEN I click on an existing note in the list in the left-hand column
-THEN that note appears in the right-hand column and a "New Note" button appears in the navigation
-WHEN I click on the "New Note" button in the navigation at the top of the page
-THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column and the button disappears
-```
+ * [Technologies-Used](#technologies-used)
 
-## Mock-Up
+ * [Installation](#installation)
 
-The following GIF shows the web application's appearance and functionality:
+ * [Credits](#credits)
 
-![Existing notes are listed in the left-hand column with empty fields on the right-hand side for the new note’s title and text.](./Assets/11-express-homework-demo.gif)
+ * [Features](#features)
 
-## Getting Started
+ * [Usage-Information](#usage-information)
 
-On the back end, the application should include a `db.json` file that will be used to store and retrieve notes using the `fs` module.
+ * [Contribution-Guidelines](#contribution-guidelines)
 
-The following HTML routes should be created:
+ * [Test-Instructions](#test-instructions)
 
-* `GET /notes` should return the `notes.html` file.
+ * [License](#license)
 
-* `GET *` should return the `index.html` file.
+ * [Questions](#questions)
 
-The following API routes should be created:
+## Description
 
-* `GET /api/notes` should read the `db.json` file and return all saved notes as JSON.
+This application was designed to give users a place to store notes to help them organize their thoughts and to keep track of tasks they need to complete. It is powered by Express and JavaScript and implements an imitation database using a json file (db.json) to save and retrieve data. I was responsible for connecting the backend and frontend of this application through the use of GET, POST, and DELETE requests within Express which allows users to save, retrieve, post new data, and delete data from the application by use of the front end user interface (UI). I utilized an application called Insomnia to test GET, POST, and DELETE routes. This allowed me to test my routes without needing a user interface (UI) and cut down on testing time; it is definitely a very very useful application when implementing backend development. As I just stated, it allowed for me to see what my routes were sending, returning, and deleting without needing an index.html file and a linked script.js file.  Through building this application, I learned some basic functionality of what Express can do and how powerful this framework can be when large scale databases interacting with APIs to send and retrieve data to one another. I also did experience some strange errors when building out the application, which I believe had to do with whats called a raise condition and concurrency issues. Future development of this application would definitely aim to further evaluate how to avoid creating raise issues within the routing, creating a routes folder for further file organization-keeping the server.js file less cluttered, and potentially implementing the use of an actual database to save, post, and delete data from (would use MySQL).
 
-* `POST /api/notes` should receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
+## Live URL of Deployed Application
 
-## Bonus
+Deployed on render:
 
-You haven’t learned how to handle DELETE requests, but this application offers that functionality on the front end. As a bonus, try to add the DELETE route to the application using the following guideline:
+<!-- Render deployed link -->
 
-* `DELETE /api/notes/:id` should receive a query parameter that contains the id of a note to delete. To delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
+## Live Screen Recording of Application Functionality
 
-## Grading Requirements
+<!-- https://drive.google.com/file/d/1gE34wxOoIaKn4J0mv9qtXtMQ0jdbJ1_k/view -->
 
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
+## Screenshots
 
-This Challenge is graded based on the following criteria:
+![Screenshot1-week-11-challenge](https://user-images.png)
 
-### Technical Acceptance Criteria: 40%
 
-* Satisfies all of the preceding acceptance criteria plus the following:
 
-  * Application front end must connect to an Express.js back end.
+## Technologies Used
 
-  * Application back end must store notes that have a unique id in a JSON file.
+This project is powered by Express.js, Node.js (v16.19.1), and JavaScript. It utilizes uniqid (node package manager), and file system module (node package manager) as dependencies, and utilized an application called Insomnia to test GET, POST, and DELETE request routes without needing a front end framework built out.
 
-  * Application must be deployed to Render.
+## Installation
 
-### Deployment: 36%
+1. Clone the repo:
+   git clone https://github.com/L-Lainio/express.jsNoteTaker
 
-* Application deployed at live URL.
+2. Open in VS Code. If you do not have VS code you must install it.
 
-* Application loads with no errors.
+3. Using the terminal, install node.js v16. If you have homebrew, the command should look like the following (brew install node@16), however this may vary and the documentation should be consulted.
 
-* Application GitHub URL submitted.
+4. Once node.js v16 is installed, in the terminal, utilize the command npm init -y to initialize and create a package.json where project files will be stored.
 
-* GitHub repository contains application code.
+5. Next, use the terminal to run the command npm i to install the dependencies associated with this application (developers may need to install express and uniqid directly from the command line, to do so the command for express will be npm i express to install the latests version of Express framework globally so that it can be used within the node terminal, and npm i uniqid to install the latest version of uniqid).
 
-### Application Quality: 11%
+6. To run the server, within the terminal, type the command npm start or node server.js.
 
-* Application console is free of errors.
+7. Once the server is running, users can then access the front end of the application within the browser to observe full functionality of the site.
 
-### Repository Quality: 13%
+## Credits
 
-* Repository has a unique name.
+Much of this application followed outline code found within the week 11 class activities (specifically activity 24). Also worked closely with one of class TA's Jenny Trevizo to handle the delete route functionality.
 
-* Repository follows best practices for file structure and naming conventions.
+## Features
 
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
+Features of this application include the users ability to retrieve and save notes from/to a mock database.json file which will persist on page load unless deleted.
 
-* Repository contains multiple descriptive commit messages.
+## Usage Information
 
-* Repository contains quality README file with description, screenshot, and link to deployed application.
+This application is powered by Express meaning for it to function properly, there needs to be a server running in the background. To start the server, navigate to the directory of the application, install all dependencies (npm i), then type the command npm start (or node index.js). A message should then display in the command line saying "App listening at http://localhost:3001 🚀". Once the server is running, then navigate to the front end of the application directly from the command line by holding command and clicking the link http://localhost:3001. From there, users can pull up any existing notes saved to the database or create new notes, which once saved will be pushed to the database and persisted.
 
-### Bonus: +10 Points
+## Contribution Guidelines
 
-Fulfilling the following can add up to 10 points to your grade. Note that the highest grade you can achieve is still 100:
+Open to collaboration, if you choose to do so open an issue and modify any changes you would like to see on a feature branch and wait for approval before merging to the main branch.
 
-* Application allows users to delete notes.
+NOTICE: Contributor Covenant is released under the Creative Commons Attribution 4.0 International Public License, which requires that attribution be included.
 
-## Review
+## Test Instructions
 
-You are required to submit BOTH of the following for review:
+There is currently no unit testing yet written for this application.
 
-* The URL of the functional, deployed application.
+## License
 
-* The URL of the GitHub repository, with a unique name and a README describing the project.
+NOTICE: This application is covered under the MIT License
 
----
-© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+## Questions
+
+Have additional questions? Click the links below to reach me through my GitHub account or Email address.
+
+[Link to Github](https://github.com/L-Lainio)
+
+<a href="mailto:arollainio@gmail.com">arollainio@gmail.com</a>
