@@ -11,12 +11,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("/public/index.html"));
+app.use(express.static("public"));
 
 // Get route which sends b/public/index.html page
-app.get("/", (req, res) =>
-	res.sendFile(path.join(__dirname, "/public/index.html"))
-);
+app.get("/assets/css/styles.css", (req, res) => {
+	res.set("Content-Type", "text/css");
+	res.sendFile(path.join(__dirname, "/public/assets/css/styles.css"));
+});
 
 // Get route which sends back the notes.html page
 app.get("/notes", (req, res) =>

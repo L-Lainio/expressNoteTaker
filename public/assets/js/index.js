@@ -1,3 +1,5 @@
+/** @format */
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -7,7 +9,7 @@ let noteList;
 if (window.location.pathname === "/notes") {
 	noteTitle = document.querySelector(".note-title");
 	noteText = document.querySelector(".note-textarea");
-	saveNoteBtn = document.querySelector(".save-note");
+	saveBtn = document.querySelector(".save-note");
 	newNoteBtn = document.querySelector(".new-note");
 	noteList = document.querySelectorAll(".list-container .list-group");
 }
@@ -34,7 +36,7 @@ const getNotes = () =>
 	});
 
 const saveNote = (note) =>
-	fetch("/api/notes", {
+	console.log.fetch("/api/notes", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -50,28 +52,26 @@ const deleteNote = (id) =>
 		},
 	});
 
-const renderActiveNote = () => {
-	hide(saveNoteBtn);
-
-	if (activeNote.id) {
-		noteTitle.setAttribute("readonly", true);
-		noteText.setAttribute("readonly", true);
-		noteTitle.value = activeNote.title;
-		noteText.value = activeNote.text;
-	} else {
-		noteTitle.removeAttribute("readonly");
-		noteText.removeAttribute("readonly");
-		noteTitle.value = "";
-		noteText.value = "";
-	}
-};
+if (activeNote && activeNote.id) {
+	noteTitle.setAttribute("readonly", true);
+	noteText.setAttribute("readonly", true);
+	noteTitle.value = activeNote.title;
+	noteText.value = activeNote.text;
+}
+if (noteTitle) {
+	noteTitle.removeAttribute("readonly");
+}
+if (noteText) {
+	noteText.removeAttribute("readonly");
+}
 
 const handleNoteSave = () => {
+	// Function logic here
 	const newNote = {
 		title: noteTitle.value,
 		text: noteText.value,
 	};
-	saveNote(newNote).then(() => {
+	console.log(newNote).then(() => {
 		getAndRenderNotes();
 		renderActiveNote();
 	});
@@ -96,29 +96,36 @@ const handleNoteDelete = (e) => {
 };
 
 // Sets the activeNote and displays it
-const handleNoteView = (e) => {
-	e.preventDefault();
-	activeNote = JSON.parse(e.target.parentElement.getAttribute("data-note"));
-	renderActiveNote();
+const renderActiveNote = () => {
+	const newNote = {
+		title: noteTitle.value,
+		text: noteText.value,
+	};
+
+	saveNote(newNote)
+		.then(() => {
+			getAndRenderNotes();
+			renderActiveNote();
+		})
+		.catch((error) => {
+			console.error("Error saving note:", error);
+		});
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
-const handleNewNoteView = (e) => {
-	activeNote = {};
-	show(clearBtn);
-	renderActiveNote();
-};
-
 const handleRenderSaveBtn = () => {
-	show(clearBtn);
-	if (!noteTitle.value.trim() && !noteText.value.trim()) {
-		hide(clearBtn);
-	} else if (!noteTitle.value.trim() || !noteText.value.trim()) {
-		hide(saveNoteBtn);
+	if (!noteTitle.value.trim() || !noteText.value.trim()) {
+		hide(saveBtn);
 	} else {
-		show(saveNoteBtn);
+		show(saveBtn);
 	}
 };
+
+// Event listeners for keyup events on input fields
+if (noteTitle) {
+	noteTitle.addEventListener("keyup", handleRenderSaveBtn);
+}
+noteText.addEventListener("keyup", handleRenderSaveBtn);
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
@@ -138,7 +145,7 @@ const renderNoteList = async (notes) => {
 		const spanEl = document.createElement("span");
 		spanEl.classList.add("list-item-title");
 		spanEl.innerText = text;
-		spanEl.addEventListener("click", handleNoteView);
+		spanEl.addEventListener("click", handleNoteSave);
 
 		liEl.append(spanEl);
 
@@ -181,7 +188,7 @@ const renderNoteList = async (notes) => {
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === "/notes") {
-	saveNoteBtn.addEventListener("click", handleNoteSave);
+	saveBtn.addEventListener("click", handleNoteSave);
 	newNoteBtn.addEventListener("click", handleNewNoteView);
 	noteTitle.addEventListener("keyup", handleRenderSaveBtn);
 	noteText.addEventListener("keyup", handleRenderSaveBtn);
