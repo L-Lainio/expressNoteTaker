@@ -88,8 +88,6 @@ This application is powered by Express meaning for it to function properly, ther
 
 Open to collaboration, if you choose to do so open an issue and modify any changes you would like to see on a feature branch and wait for approval before merging to the main branch.
 
-NOTICE: Contributor Covenant is released under the Creative Commons Attribution 4.0 International Public License, which requires that attribution be included.
-
 ## Test Instructions
 
 There is currently no unit testing yet written for this application.

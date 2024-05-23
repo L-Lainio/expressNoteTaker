@@ -5,28 +5,28 @@ const uuid = require("uuid");
 
 const PORT = process.env.PORT || 3001;
 
+// Creates new app with express
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
+app.use(express.static("Develop/public"));
 
-// Get route which sends b/public/index.html page
-app.get("/assets/css/styles.css", (req, res) => {
-	res.set("Content-Type", "text/css");
-	res.sendFile(path.join(__dirname, "/public/assets/css/styles.css"));
-});
+// Get route which sends back the index.html page
+app.get("/", (req, res) =>
+	res.sendFile(path.join(__dirname, "Develop/public/index.html"))
+);
 
 // Get route which sends back the notes.html page
 app.get("/notes", (req, res) =>
-	res.sendFile(path.join(__dirname, "/public/notes.html"))
+	res.sendFile(path.join(__dirname, "Develop/public/notes.html"))
 );
 
 // Get route -> which reads the db.json file and sends back the parsed JSON data
 app.get("/api/notes", function (req, res) {
-	fs.readFile("./db/db.json", "utf8", (err, data) => {
+	fs.readFile("Develop/db/db.json", "utf8", (err, data) => {
 		var jsonData = JSON.parse(data);
 		console.log(jsonData);
 		res.json(jsonData);
@@ -62,7 +62,7 @@ app.post("/api/notes", (req, res) => {
 			id: uuid(),
 		};
 
-		readThenAppendToJson(newNote, "./db/db.json");
+		readThenAppendToJson(newNote, "Develop/db/db.json");
 
 		const response = {
 			status: "success",
@@ -79,13 +79,13 @@ app.post("/api/notes", (req, res) => {
 app.delete("/api/notes/:id", (req, res) => {
 	let id = req.params.id;
 	let parsedData;
-	fs.readFile("./db/db.json", "utf8", (err, data) => {
+	fs.readFile("Develop/db/db.json", "utf8", (err, data) => {
 		if (err) {
 			console.error(err);
 		} else {
 			parsedData = JSON.parse(data);
 			const filterData = parsedData.filter((note) => note.id !== id);
-			writeNewNoteToJson("./db/db.json", filterData);
+			writeNewNoteToJson("Develop/db/db.json", filterData);
 		}
 	});
 	res.send(`Deleted note with ${req.params.id}`);
