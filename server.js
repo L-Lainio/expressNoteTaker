@@ -1,31 +1,31 @@
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
-const uuid = require("uuid");
+const express = require('express');
 
 const PORT = process.env.PORT || 3001;
+const notes = express();
+const apiRoutes = require('./routes/apiRoutes');
+const htmlRoutes = require('./routes/htmlRoutes');
 
-// Creates new app with express
-const app = express();
+// Creates new notes with express
+const newnotes = express();
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+notes.use(express.json());
+notes.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("Develop/public"));
+notes.use(express.static("Develop/public"));
 
 // Get route which sends back the index.html page
-app.get("/", (req, res) =>
+notes.get("/", (req, res) =>
 	res.sendFile(path.join(__dirname, "Develop/public/index.html"))
 );
 
 // Get route which sends back the notes.html page
-app.get("/notes", (req, res) =>
+notes.get("/notes", (req, res) =>
 	res.sendFile(path.join(__dirname, "Develop/public/notes.html"))
 );
 
 // Get route -> which reads the db.json file and sends back the parsed JSON data
-app.get("/api/notes", function (req, res) {
+notes.get("/api/notes", function (req, res) {
 	fs.readFile("Develop/db/db.json", "utf8", (err, data) => {
 		var jsonData = JSON.parse(data);
 		console.log(jsonData);
@@ -53,7 +53,7 @@ const writeNewNoteToJson = (destination, content) =>
 	);
 
 // Post route -> receives a new note, saves it to request body, adds it to the db.json file, and then returns the new note to the client
-app.post("/api/notes", (req, res) => {
+notes.post("/api/notes", (req, res) => {
 	const { title, text } = req.body;
 	if (title && text) {
 		const newNote = {
@@ -76,7 +76,7 @@ app.post("/api/notes", (req, res) => {
 });
 
 // Delete route -> reads the db.json file, uses the json objects uuids to match the object to be deleted, removes that object from the db.json file, then re-writes the db.json file
-app.delete("/api/notes/:id", (req, res) => {
+notes.delete("/api/notes/:id", (req, res) => {
 	let id = req.params.id;
 	let parsedData;
 	fs.readFile("/db/db.json", "utf8", (err, data) => {
@@ -92,6 +92,6 @@ app.delete("/api/notes/:id", (req, res) => {
 });
 
 // App.listen is used to spin up our local server
-app.listen(3001, () =>
+notes.listen( () =>
 	console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
