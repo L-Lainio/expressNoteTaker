@@ -33,7 +33,7 @@ Week-11 Challenge
 
 ## Description
 
-This application was designed to give users a place to store notes to help them organize their thoughts and to keep track of tasks they need to complete. It is powered by Express and JavaScript and implements an imitation database using a json file (db.json) to save and retrieve data. I was responsible for connecting the backend and frontend of this application through the use of GET, POST, and DELETE requests within Express which allows users to save, retrieve, post new data, and delete data from the application by use of the front end user interface (UI). I utilized an application called Insomnia to test GET, POST, and DELETE routes. This allowed me to test my routes without needing a user interface (UI) and cut down on testing time; it is definitely a very very useful application when implementing backend development. As I just stated, it allowed for me to see what my routes were sending, returning, and deleting without needing an index.html file and a linked script.js file.  Through building this application, I learned some basic functionality of what Express can do and how powerful this framework can be when large scale databases interacting with APIs to send and retrieve data to one another. I also did experience some strange errors when building out the application, which I believe had to do with whats called a raise condition and concurrency issues. Future development of this application would definitely aim to further evaluate how to avoid creating raise issues within the routing, creating a routes folder for further file organization-keeping the server.js file less cluttered, and potentially implementing the use of an actual database to save, post, and delete data from (would use MySQL).
+This project utilizes Express and JavaScript to create a simulated database using a JSON file (db.json) for data storage and retrieval. The objective is to establish the connection between the backend and frontend of the application by implementing GET, POST, and DELETE requests in Express. These requests enable users to save, retrieve, add new data, and delete data through the frontend user interface (UI). Insomnia was employed to test these routes, streamlining the testing process by eliminating the need for a UI and enhancing efficiency during backend development. This tool facilitated the examination of route functionality, data transmission, and deletion without relying on specific HTML and JavaScript files. While working on this project, I gained insight into the fundamental capabilities of Express and its potential in managing extensive databases that interact with APIs for data exchange. Despite encountering some challenges during development, future enhancements for this application would focus on refining routing practices, organizing files into a dedicated routes folder for improved structure, and transitioning to a real database like MySQL for enhanced data management capabilities.
 
 ## Live URL of Deployed Application
 
@@ -43,7 +43,7 @@ https://express-jsnotetaker.onrender.com
 
 ## Live Screen Recording of Application Functionality
 
-https://share.zight.com/E0uenz2G
+![Video Walkthrough](https://share.zight.com/E0uenz2G)
 
 ## Screenshots
 
@@ -74,7 +74,7 @@ This project is powered by Express.js, Node.js (v16.19.1), and JavaScript. It ut
 
 ## Credits
 
-Much of this application followed outline code found within the week 11 class activities (specifically activity 24). Also worked closely with one of class TA's Jenny Trevizo to handle the delete route functionality.
+Much of this application followed outline code found within the week 11 class activities.
 
 ## Features
 
