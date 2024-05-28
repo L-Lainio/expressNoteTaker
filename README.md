@@ -43,13 +43,14 @@ https://express-jsnotetaker.onrender.com
 
 ## Live Screen Recording of Application Functionality
 
-![Video Walkthrough](https://share.zight.com/E0uenz2G)
+<!-- ![Video Walkthrough](https://share.zight.com/E0uenz2G) -->
 
-## Screenshots
+<!-- ## My GIF
+![](./assets/images/Zight%20Recording%202024-5-23%20at%206.42.08%20PM.gif) -->
 
-![Screenshot1-week-11-challenge](https://share.zight.com/04u8qYGd)
-
-
+## My Screenshot
+![Screenshot](./assets/images/Zight%202024-5-28%20at%2012.48.19%20PM.png)
+![Screenshot](./assets/images/Zight%202024-5-28%20at%2012.48.35%20PM.png)
 
 ## Technologies Used
 

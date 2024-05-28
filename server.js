@@ -4,17 +4,25 @@ const path = require('path');
 
 const express = require('express');
 const app = express();
-
+const { uuid } = require('uuid');
 const allNotes = require('./db/db.json');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.get('/api/notes', (req, res) => {
-	res.json(allNotes.slice(1));
-});
 
+//API Routes
+// GET /api/notes should read the db.json file and return all saved notes as JSON.
+app.get('/api/notes', (req, res) => {
+	fs.readFile('./db/db.json', (err, data) => {
+		///error logging
+		if (err) throw err;
+		let dbData = JSON.parse(data);
+		//Returns new database
+		res.json(dbData)
+	});
+})
 app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, './public/index.html'));
 });
