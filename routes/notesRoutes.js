@@ -1,12 +1,13 @@
 const router = require("express").Router();
-let data = require("../../db/db.json");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const path = require("path");
 
+
 // GET /api/notes
 router.get("/", (req, res) => {
-	console.log({ data });
+	const data = []; // Define the 'data' variable
+	console.log({  });
 	res.json(data);
 });
 
@@ -43,11 +44,10 @@ function createNewNote(body, notesArray) {
 }
 
 router.post('/', (req, res) => {
-	const newNote = createNewNote(req.body, data);
-	res.json(newNote);
+	const note = createNewNote(req.body, data);
+	console.log(note);
+	res.json(note);
 });
-
-
 
 
 module.exports = router;
