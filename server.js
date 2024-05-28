@@ -1,97 +1,77 @@
-const express = require('express');
-
 const PORT = process.env.PORT || 3001;
-const notes = express();
-const apiRoutes = require('./routes/apiRoutes');
-const htmlRoutes = require('./routes/htmlRoutes');
+const fs = require('fs');
+const path = require('path');
 
-// Creates new notes with express
-const newnotes = express();
+const express = require('express');
+const app = express();
 
-// Middleware
-notes.use(express.json());
-notes.use(express.urlencoded({ extended: true }));
+const allNotes = require('./db/db.json');
 
-notes.use(express.static("Develop/public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('public'));
 
-// Get route which sends back the index.html page
-notes.get("/", (req, res) =>
-	res.sendFile(path.join(__dirname, "Develop/public/index.html"))
-);
-
-// Get route which sends back the notes.html page
-notes.get("/notes", (req, res) =>
-	res.sendFile(path.join(__dirname, "Develop/public/notes.html"))
-);
-
-// Get route -> which reads the db.json file and sends back the parsed JSON data
-notes.get("/api/notes", function (req, res) {
-	fs.readFile("Develop/db/db.json", "utf8", (err, data) => {
-		var jsonData = JSON.parse(data);
-		console.log(jsonData);
-		res.json(jsonData);
-	});
+app.get('/api/notes', (req, res) => {
+	res.json(allNotes.slice(1));
 });
 
-// Reads the newly added notes from the request body and then adds them to the db.json file
-const readThenAppendToJson = (content, file) => {
-	fs.readFile(file, "utf8", (err, data) => {
-		if (err) {
-			console.error(err);
-		} else {
-			const parsedData = JSON.parse(data);
-			parsedData.push(content);
-			writeNewNoteToJson(file, parsedData);
-		}
-	});
-};
+app.get('/', (req, res) => {
+	res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
-// Writes data to db.json -> utilized within the readThenAppendToJson function
-const writeNewNoteToJson = (destination, content) =>
-	fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
-		err ? console.error(err) : console.info(`\nData written to ${destination}`)
+app.get('/notes', (req, res) => {
+	res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+function createNewNote(body, notesArray) {
+	const newNote = body;
+	if (!Array.isArray(notesArray))
+		notesArray = [];
+
+	if (notesArray.length === 0)
+		notesArray.push(0);
+
+	body.id = notesArray[0];
+	notesArray[0]++;
+
+	notesArray.push(newNote);
+	fs.writeFileSync(
+		path.join(__dirname, './db/db.json'),
+		JSON.stringify(notesArray, null, 2)
 	);
+	return newNote;
+}
 
-// Post route -> receives a new note, saves it to request body, adds it to the db.json file, and then returns the new note to the client
-notes.post("/api/notes", (req, res) => {
-	const { title, text } = req.body;
-	if (title && text) {
-		const newNote = {
-			title: title,
-			text: text,
-			id: uuid(),
-		};
-
-		readThenAppendToJson(newNote, "/db/db.json");
-
-		const response = {
-			status: "success",
-			body: newNote,
-		};
-
-		res.json(response);
-	} else {
-		res.json("Error in posting new note");
-	}
+app.post('/api/notes', (req, res) => {
+	const newNote = createNewNote(req.body, allNotes);
+	res.json(newNote);
 });
 
-// Delete route -> reads the db.json file, uses the json objects uuids to match the object to be deleted, removes that object from the db.json file, then re-writes the db.json file
-notes.delete("/api/notes/:id", (req, res) => {
-	let id = req.params.id;
-	let parsedData;
-	fs.readFile("/db/db.json", "utf8", (err, data) => {
-		if (err) {
-			console.error(err);
-		} else {
-			parsedData = JSON.parse(data);
-			const filterData = parsedData.filter((note) => note.id !== id);
-			writeNewNoteToJson("db/db.json", filterData);
+function deleteNote(id, notesArray) {
+	for (let i = 0; i < notesArray.length; i++) {
+		let note = notesArray[i];
+
+		if (note.id == id) {
+			notesArray.splice(i, 1);
+			fs.writeFileSync(
+				path.join(__dirname, './db/db.json'),
+				JSON.stringify(notesArray, null, 2)
+			);
+
+			break;
 		}
-	});
-	res.send(`Deleted note with ${req.params.id}`);
+	}
+}
+
+app.delete('/api/notes/:id', (req, res) => {
+	deleteNote(req.params.id, allNotes);
+	res.json(true);
 });
 
-// App.listen is used to spin up our local server
-notes.listen( () =>
-	console.log(`App listening at http://localhost:${PORT} 🚀`)
-);
+//App listens with front end on this port
+app.listen(PORT, () =>
+	console.log(`App listening on ${PORT}`))

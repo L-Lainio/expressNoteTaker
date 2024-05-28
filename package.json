@@ -1,0 +1,33 @@
+{
+  "name": "expressnotetaker",
+  "version": "1.0.0",
+  "description": "using node npm packages",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L-Lainio/expressNoteTaker.git"
+  },
+  "keywords": [
+    "express.js"
+  ],
+  "author": "LLainio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/L-Lainio/expressNoteTaker/issues"
+  },
+  "homepage": "https://github.com/L-Lainio/expressNoteTaker#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "lib": "^5.1.0",
+    "path": "^0.12.7",
+    "uuid": "^9.0.1"
+  }
+}
