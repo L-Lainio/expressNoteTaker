@@ -1,25 +1,51 @@
-const router = require('express').Router();
-const { createNewNote, deleteNote } = require('../../lib/notes');
-let { notesArray } = require('../../lib/notes');
+const router = require("express").Router();
+let data = require("../../db/db.json");
+const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
+const path = require("path");
 
-
-router.get('/notes', (req, res) => {
-	let results = notesArray;
-	res.json(results);
+// GET /api/notes
+router.get("/notes", (req, res) => {
+	console.log({ data });
+	res.json(data);
 });
 
-router.post('/notes', (req, res) => {
-	// set id based on what the next index of the array will be
-	if (notesArray) {
-		req.body.id = notesArray.length.toString();
-	} else { req.body.id = 0 }
-	res.json(createNewNote(req.body, notesArray));
+// DELETE /api/notes/:id
+// get one specific note, req.body.id, readfile db.json, find entry that matches that id
+router.delete("/notes/:id", (req, res) => {
+	// rewrite data and return only elements that DON'T match deleted note ID
+	data = data.filter((el) => el.id !== req.params.id);
+	fs.writeFile(
+		path.join(__dirname, "../../db/db.json"),
+		JSON.stringify(data),
+		function (err) {
+			if (err) {
+				res.status(404).json({ error: err });
+			}
+			res.json(data);
+		}
+	);
 });
 
-router.delete('/notes/:id', async (req, res) => {
-	const { id } = req.params
-	notesArray = await deleteNote(id, notesArray);
-	res.json(notesArray);
+// POST /api/notes
+//   create new UUID, take note out of req.body, apply UUID, save to db.json
+router.post("/notes", (req, res) => {
+	// spread operator
+	const newNote = { ...req.body, id: uuidv4() };
+	console.log(newNote);
+	console.log(req.body);
+	data.unshift(newNote);
+	// joins relative to absolute path
+	fs.writeFile(
+		path.join(__dirname, "../../db/db.json"),
+		JSON.stringify(data),
+		function (err) {
+			if (err) {
+				res.status(404).json({ error: err });
+			}
+			res.json(data);
+		}
+	);
 });
 
 module.exports = router;
