@@ -1,11 +1,10 @@
 [
-  null,
   {
     "title": "new note",
-    "text": "new",
-    "id": {
-      "title": "Test Title",
-      "text": "Test text"
-    }
+    "text": "meh"
+  },
+  {
+    "title": "note",
+    "text": "123"
   }
 ]
