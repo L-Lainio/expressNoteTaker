@@ -41,16 +41,11 @@ Deployed on render:
 
 https://express-jsnotetaker.onrender.com
 
-## Live Screen Recording of Application Functionality
-
-<!-- ![Video Walkthrough](https://share.zight.com/E0uenz2G) -->
-
-<!-- ## My GIF
-![](./assets/images/Zight%20Recording%202024-5-23%20at%206.42.08%20PM.gif) -->
+## My GIF
+<!-- ![](./assets/images/Zight%20Recording%202024-5-23%20at%206.42.08%20PM.gif) -->
 
 ## My Screenshot
-![Screenshot](./assets/images/Zight%202024-5-28%20at%2012.48.19%20PM.png)
-![Screenshot](./assets/images/Zight%202024-5-28%20at%2012.48.35%20PM.png)
+<!-- ![](./assets/images/Zight%202024-5-23%20at%206.48.16%20PM.png) -->
 
 ## Technologies Used
 

@@ -6,16 +6,16 @@ body {
 }
 
 .bg-dark {
-  background-color: rgb(57 41 96) !important;
+  background-color: rgb(105, 75, 180)!important;
 }
 
 .bg-info {
   --darkreader-bg--bs-bg-opacity: 1;
-      background-color: rgb(57 41 96) !important;
+      background-color: rgb(105, 75, 180) !important;
 }
 
 header {
-  background-color: rgb(57 41 96)  !important;
+  background-color: rgb(94, 72, 148)  !important;
 }
 
 .save-note-btn, .new-note-btn, .delete-btn {
