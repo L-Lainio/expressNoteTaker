@@ -42,10 +42,12 @@ Deployed on render:
 https://express-jsnotetaker.onrender.com
 
 ## My GIF
-<!-- ![](./assets/images/Zight%20Recording%202024-5-23%20at%206.42.08%20PM.gif) -->
+![](./public/assets/images/Zight%20Recording%202024-5-29%20at%2010.15.47%20PM.gif)
 
 ## My Screenshot
-<!-- ![](./assets/images/Zight%202024-5-23%20at%206.48.16%20PM.png) -->
+![](./public/assets/images/Zight%202024-5-29%20at%2010.17.25%20PM.jpeg)
+![](./public/assets/images/Zight%202024-5-29%20at%2010.18.10%20PM.jpeg)
+![](./public/assets/images/Zight%202024-5-29%20at%2010.28.59%20PM.jpeg)
 
 ## Technologies Used
 
