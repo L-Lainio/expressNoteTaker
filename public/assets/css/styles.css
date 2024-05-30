@@ -5,6 +5,19 @@ body {
   padding: 0;
 }
 
+.bg-dark {
+  background-color: rgb(57 41 96) !important;
+}
+
+.bg-info {
+  --darkreader-bg--bs-bg-opacity: 1;
+      background-color: rgb(57 41 96) !important;
+}
+
+header {
+  background-color: rgb(57 41 96)  !important;
+}
+
 .save-note-btn, .new-note-btn, .delete-btn {
   display: none;
 }
@@ -38,7 +51,7 @@ body {
 
 .note-title:read-only,
 .note-textarea:read-only {
-  color: #757575;
+  color: #8d3182;
 }
 
 .list-container .card {
