@@ -42,7 +42,7 @@ Deployed on render:
 https://express-jsnotetaker.onrender.com
 
 ## My GIF
-![](./public/assets/images/Zight%20Recording%202024-5-29%20at%2010.15.47%20PM.gif)
+![](/public/assets/images/Zight%20Recording%202024-5-30%20at%209.30.04%20PM.gif)
 
 ## My Screenshot
 ![](./public/assets/images/Zight%202024-5-29%20at%2010.17.25%20PM.jpeg)
