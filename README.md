@@ -1,39 +1,41 @@
 # Note Taker (powered by Express.js)
-Week-11 Challenge
+Week-11 Challenge Express.js: Note Taker
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributor Covenant](https://img.shields.io/badge/Lora-Lainio-4baaaa.svg)](code_of_conduct.md)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![GITHUB](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Lora Lainio](https://img.shields.io/badge/Lora-Lainio-4baaaa.svg)
+
 
 ## Table of Contents
-
- * [Description](#description)
-
- * [Live-URL-of-Deployed-Application](#live-url-of-deployed-application)
-
- * [Live-Screen-Recording-of-Application-Functionality](#live-screen-recording-of-application-functionality)
-
- * [Screenshots](#screenshots)
-
- * [Technologies-Used](#technologies-used)
-
- * [Installation](#installation)
-
- * [Credits](#credits)
-
- * [Features](#features)
-
- * [Usage-Information](#usage-information)
-
- * [Contribution-Guidelines](#contribution-guidelines)
-
- * [Test-Instructions](#test-instructions)
-
- * [License](#license)
-
- * [Questions](#questions)
+* [Description](#description)
+* [Screenshots](#screenshots)
+* [Technologies-Used](#technologies-used)
+* [Installation](#installation)
+* [Test-Instructions](#test-instructions)
+* [License](#license)
+* [Contact](#contact)
 
 ## Description
+In this challenge, you are tasked with creating a Note Taker application using Express.js. The front end of the application has already been developed, and your role is to build the back end, connect it to the front end, and deploy the entire application to Render.
 
-This project utilizes Express and JavaScript to create a simulated database using a JSON file (db.json) for data storage and retrieval. The objective is to establish the connection between the backend and frontend of the application by implementing GET, POST, and DELETE requests in Express. These requests enable users to save, retrieve, add new data, and delete data through the frontend user interface (UI). Insomnia was employed to test these routes, streamlining the testing process by eliminating the need for a UI and enhancing efficiency during backend development. This tool facilitated the examination of route functionality, data transmission, and deletion without relying on specific HTML and JavaScript files. While working on this project, I gained insight into the fundamental capabilities of Express and its potential in managing extensive databases that interact with APIs for data exchange. Despite encountering some challenges during development, future enhancements for this application would focus on refining routing practices, organizing files into a dedicated routes folder for improved structure, and transitioning to a real database like MySQL for enhanced data management capabilities.
+User Story: As a small business owner, I want to be able to write and save notes so that I can organize my thoughts and keep track of tasks I need to complete.
+
+Acceptance Criteria:
+
+Upon opening the Note Taker, I should see a landing page with a link to a notes page.
+Clicking on the notes page link should display existing notes on the left and fields to enter a new note on the right.
+Entering a new note title and text should reveal "Save Note" and "Clear Form" buttons at the top.
+Clicking "Save" should save the new note, display it with existing notes, and hide the navigation buttons.
+Clicking on an existing note should display it on the right and show a "New Note" button in the navigation.
+Clicking "New Note" should present empty fields for a new note and hide the button.
+Mock-Up: The provided animation demonstrates the appearance and functionality of the web application.
 
 ## Live URL of Deployed Application
 
@@ -41,63 +43,49 @@ Deployed on render:
 
 https://express-jsnotetaker.onrender.com
 
-## My GIF
+## Screenshots
 ![](/public/assets/images/Zight%20Recording%202024-5-30%20at%209.30.04%20PM.gif)
-
-## My Screenshot
 ![](./public/assets/images/Zight%202024-5-29%20at%2010.17.25%20PM.jpeg)
 ![](./public/assets/images/Zight%202024-5-29%20at%2010.18.10%20PM.jpeg)
 ![](./public/assets/images/Zight%202024-5-29%20at%2010.28.59%20PM.jpeg)
 
 ## Technologies Used
-
-This project is powered by Express.js, Node.js (v16.19.1), and JavaScript. It utilizes uuid (node package manager), and file system module (node package manager) as dependencies, and utilized an application called Insomnia to test GET, POST, and DELETE request routes without needing a front end framework built out.
+Express.js: Back end framework for handling HTTP requests.
+fs module: Node.js module for file system operations.
+HTML: Markup language for creating web pages.
+JSON: Data format for storing and exchanging data.
+npm packages: Used to manage dependencies and enhance functionality.
 
 ## Installation
 
-1. Clone the repo:
-   git clone https://github.com/L-Lainio/express.jsNoteTaker
+Clone the starter code repository to your local machine.
+Set up the db.json file to store and retrieve notes using the fs module.
+Create HTML routes:
+GET /notes to return the notes.html file.
+GET * to return the index.html file.
+Implement API routes:
+GET /api/notes to read the db.json file and return all saved notes as JSON.
+POST /api/notes to receive a new note, add it to db.json with a unique id, and return the new note to the client.
 
-2. Open in VS Code. If you do not have VS code you must install it.
-
-3. Using the terminal, install node.js v16. If you have homebrew, the command should look like the following (brew install node@16), however this may vary and the documentation should be consulted.
-
-4. Once node.js v16 is installed, in the terminal, utilize the command npm init -y to initialize and create a package.json where project files will be stored.
-
-5. Next, use the terminal to run the command npm i to install the dependencies associated with this application (developers may need to install express and uuid directly from the command line, to do so the command for express will be npm i express to install the latests version of Express framework globally so that it can be used within the node terminal, and npm i uuid to install the latest version of uuid).
-
-6. To run the server, within the terminal, type the command npm start or node server.js.
-
-7. Once the server is running, users can then access the front end of the application within the browser to observe full functionality of the site.
-
-## Credits
-
-Much of this application followed outline code found within the week 11 class activities.
-
-## Features
-
-Features of this application include the users ability to retrieve and save notes from/to a mock database.json file which will persist on page load unless deleted.
-
-## Usage Information
-
-This application is powered by Express meaning for it to function properly, there needs to be a server running in the background. To start the server, navigate to the directory of the application, install all dependencies (npm i), then type the command npm start (or node index.js). A message should then display in the command line saying "App listening at http://localhost:3001 🚀". Once the server is running, then navigate to the front end of the application directly from the command line by holding command and clicking the link http://localhost:3001. From there, users can pull up any existing notes saved to the database or create new notes, which once saved will be pushed to the database and persisted.
-
-## Contribution Guidelines
-
-Open to collaboration, if you choose to do so open an issue and modify any changes you would like to see on a feature branch and wait for approval before merging to the main branch.
-
-## Test Instructions
-
-There is currently no unit testing yet written for this application.
+## Test-Instructions
+Start your Express server.
+Use a tool like Insomnia or Postman to test the API routes:
+Send a GET request to /api/notes to retrieve all saved notes.
+Send a POST request to /api/notes with a new note in the request body to save a new note.
+Access the HTML routes in your browser:
+Navigate to /notes to view the notes.html file.
+Navigate to any other route to ensure the index.html file is returned.
 
 ## License
 
 NOTICE: This application is covered under the MIT License
 
-## Questions
+© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+
+## Contact
 
 Have additional questions? Click the links below to reach me through my GitHub account or Email address.
 
 [Link to Github](https://github.com/L-Lainio)
 
-<a href="mailto:arollainio@gmail.com">arollainio@gmail.com</a>
+<a href="mailto:lora.lainio.it@gmail.com">lora.lainio.it@gmail.com</a>
