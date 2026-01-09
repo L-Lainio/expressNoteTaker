@@ -89,4 +89,3 @@ Have additional questions? Click the links below to reach me through my GitHub a
 
 [Link to Github](https://github.com/L-Lainio)
 
-<a href="mailto:lora.lainio.it@gmail.com">lora.lainio.it@gmail.com</a>
