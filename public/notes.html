@@ -17,19 +17,23 @@
 
   <body>
     <nav class="navbar bg-info">
-      <a class="navbar-brand text-light p-3" href="/">Note Taker </a>
+      <div class="ms-3">
+        <button id="theme-toggle" class="btn btn-outline-light btn-sm" title="Toggle Dark Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <a class="navbar-brand text-light p-3" href="/">Note Taker</a>
+      
       <div class="icons">
         <button type="button" class="btn btn-outline-light btn-sm save-note">
-          <span class="fas fa-save"></span>
-          <span>Save Note</span>
+          <i class="fas fa-save"></i> Save Note
         </button>
         <button type="button" class="btn btn-outline-light btn-sm new-note">
-          <span class="fas fa-edit"></span>
-          <span>New Note</span>
+          <i class="fas fa-edit"></i> New Note
         </button>
         <button type="button" class="btn btn-sm btn-outline-danger clear-btn">
-          <span class="fas fa-times"></span>
-          <span>Clear Form</span>
+          <i class="fas fa-times"></i> Clear
         </button>
       </div>
     </nav>
@@ -43,13 +47,20 @@
         <div class="col-8">
           <form class="note-form">
             <input
-            class="note-title"
-            placeholder="Note Title"
-            maxlength="28"
-            type="text"
+              id="note-title"
+              name="note-title"
+              class="note-title"
+              placeholder="Note Title"
+              maxlength="28"
+              type="text"
             />
-            <textarea class="note-textarea" placeholder="Note Text"></textarea>
-            </form>
+            <textarea 
+              id="note-text" 
+              name="note-text" 
+              class="note-textarea" 
+              placeholder="Note Text">
+            </textarea>
+          </form>
         </div>
       </div>
     </div>

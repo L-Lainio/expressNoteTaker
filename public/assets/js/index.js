@@ -9,12 +9,13 @@ if (window.location.pathname === '/notes') {
 	noteText = document.querySelector('.note-textarea');
 	saveNoteBtn = document.querySelector('.save-note');
 	newNoteBtn = document.querySelector('.new-note');
-	noteList = document.querySelectorAll('.list-container .list-group');
+	noteList = document.getElementById('list-group');
+	hide(saveNoteBtn);
 }
 
-// Show an element
+// Show an element using a standard block/inline-block style
 const show = (elem) => {
-	elem.style.display = 'inline';
+	elem.style.display = 'inline-block';
 };
 
 // Hide an element
@@ -83,7 +84,7 @@ const handleNoteDelete = (e) => {
 	e.stopPropagation();
 
 	const note = e.target;
-	const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+	const noteId = JSON.parse(note.parentElement.dataset.note).id;
 
 	if (activeNote.id === noteId) {
 		activeNote = {};
@@ -98,7 +99,7 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
 	e.preventDefault();
-	activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+	activeNote = JSON.parse(e.target.parentElement.dataset.note);
 	renderActiveNote();
 };
 
@@ -106,6 +107,50 @@ const handleNoteView = (e) => {
 const handleNewNoteView = (e) => {
 	activeNote = {};
 	renderActiveNote();
+};
+
+// Drag and drop handlers
+let draggedNote = null;
+
+const handleDragStart = (e) => {
+	draggedNote = e.currentTarget;
+	e.dataTransfer.effectAllowed = 'move';
+	e.target.classList.add('dragging');
+};
+
+const handleDragOver = (e) => {
+	e.preventDefault();
+	e.dataTransfer.dropEffect = 'move';
+	const afterElement = getDragAfterElement(noteList, e.clientY);
+	if (afterElement == null) {
+		noteList.appendChild(draggedNote);
+	} else {
+		noteList.insertBefore(draggedNote, afterElement);
+	}
+};
+
+const handleDragEnd = (e) => {
+	e.target.classList.remove('dragging');
+};
+
+const getDragAfterElement = (container, y) => {
+	const draggableElements = [
+		...container.querySelectorAll('li:not(.dragging)'),
+	];
+
+	return draggableElements.reduce(
+		(closest, child) => {
+			const box = child.getBoundingClientRect();
+			const offset = y - box.top - box.height / 2;
+
+			if (offset < 0 && offset > closest.offset) {
+				return { offset: offset, element: child };
+			} else {
+				return closest;
+			}
+		},
+		{ offset: Number.NEGATIVE_INFINITY }
+	).element;
 };
 
 const handleRenderSaveBtn = () => {
@@ -120,7 +165,7 @@ const handleRenderSaveBtn = () => {
 const renderNoteList = async (notes) => {
 	let jsonNotes = await notes.json();
 	if (window.location.pathname === '/notes') {
-		noteList.forEach((el) => (el.innerHTML = ''));
+		noteList.innerHTML = '';
 	}
 
 	let noteListItems = [];
@@ -129,6 +174,13 @@ const renderNoteList = async (notes) => {
 	const createLi = (text, delBtn = true) => {
 		const liEl = document.createElement('li');
 		liEl.classList.add('list-group-item');
+
+		if (delBtn) {
+			liEl.setAttribute('draggable', true);
+			liEl.addEventListener('dragstart', handleDragStart);
+			liEl.addEventListener('dragover', handleDragOver);
+			liEl.addEventListener('dragend', handleDragEnd);
+		}
 
 		const spanEl = document.createElement('span');
 		spanEl.classList.add('list-item-title');
@@ -141,9 +193,7 @@ const renderNoteList = async (notes) => {
 			const delBtnEl = document.createElement('i');
 			delBtnEl.classList.add(
 				'fas',
-				'fa-trash-alt',
-				'float-right',
-				'text-danger',
+				'fa-times',
 				'delete-note'
 			);
 			delBtnEl.addEventListener('click', handleNoteDelete);
@@ -166,7 +216,7 @@ const renderNoteList = async (notes) => {
 	});
 
 	if (window.location.pathname === '/notes') {
-		noteListItems.forEach((note) => noteList[0].append(note));
+		noteListItems.forEach((note) => noteList.append(note));
 	}
 };
 
@@ -178,6 +228,32 @@ if (window.location.pathname === '/notes') {
 	newNoteBtn.addEventListener('click', handleNewNoteView);
 	noteTitle.addEventListener('keyup', handleRenderSaveBtn);
 	noteText.addEventListener('keyup', handleRenderSaveBtn);
+
+	const clearBtn = document.querySelector('.clear-btn');
+	clearBtn.addEventListener('click', () => {
+		noteTitle.value = '';
+		noteText.value = '';
+		hide(saveNoteBtn);
+	});
+
+	const themeBtn = document.getElementById('theme-toggle');
+	if (themeBtn) {
+		themeBtn.addEventListener('click', () => {
+			document.body.classList.toggle('dark-theme');
+			const icon = themeBtn.querySelector('i');
+			icon.classList.toggle('fa-moon');
+			icon.classList.toggle('fa-sun');
+			
+			// Save preference (Sanitization of user settings)
+			localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+		});
+
+		// Load saved preference
+		if (localStorage.getItem('theme') === 'dark') {
+			document.body.classList.add('dark-theme');
+			themeBtn.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+		}
+	}
 }
 
 getAndRenderNotes();

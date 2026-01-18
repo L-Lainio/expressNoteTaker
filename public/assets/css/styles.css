@@ -1,3 +1,44 @@
+/* Theme Variables */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --card-bg: #ffffff;
+}
+
+body.dark-theme {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --card-bg: #1e1e1e;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease;
+}
+
+body.dark-theme .note-title, 
+body.dark-theme .note-textarea,
+body.dark-theme .list-group-item {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-color: #444;
+}
+
+body.dark-theme {
+  background-color: #121212;
+  color: #fff;
+}
+
+body.dark-theme .navbar {
+  background-color: #333 !important;
+}
+
+body.dark-theme .card {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
 html,
 body {
   height: 100%;
@@ -18,8 +59,9 @@ header {
   background-color: rgb(94, 72, 148)  !important;
 }
 
-.save-note-btn, .new-note-btn, .delete-btn {
-  display: none;
+/* Match the classes used in your index.js and notes.html */
+.save-note, .new-note, .clear-btn {
+  /* Let JavaScript handle the display, or set a default if needed */
 }
 
 .icons {
@@ -88,4 +130,36 @@ header {
   border-right: none;
   padding: 20px;
   cursor: pointer;
+	transition: background-color 0.2s ease;
+	position: relative;
+}
+
+.list-container .list-group-item[draggable='true'] {
+	cursor: grab;
+}
+
+.list-container .list-group-item[draggable='true']:active {
+	cursor: grabbing;
+}
+
+.list-container .list-group-item:hover {
+	background-color: #f8f9fa;
+}
+
+.list-container .list-group-item.dragging {
+	opacity: 0.5;
+	cursor: grabbing;
+}
+
+.delete-note {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	font-size: 1.2rem;
+	cursor: pointer;
+	transition: color 0.2s ease;
+}
+
+.delete-note:hover {
+	color: #dc3545;
 }
